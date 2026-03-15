@@ -22,6 +22,7 @@ from ..database import (
 )
 from ..tools.external.hardcover import HardcoverTool
 from .embeds import create_book_embed, create_recent_releases_embed
+from .mtg import CardsCog
 
 logger = logging.getLogger(__name__)
 
@@ -498,6 +499,7 @@ async def run_bot() -> None:
         raise ValueError("DISCORD_BOT_TOKEN environment variable is required")
 
     bot = create_bot()
+    await bot.add_cog(CardsCog(bot))
     await bot.start(token)
 
 
