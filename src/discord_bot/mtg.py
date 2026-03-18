@@ -13,6 +13,8 @@ def send_card_reply(message: Message, card: Card, bot: Bot):
         url=card.url,
         description=f"{card.type_line}\n\n{card.oracle_text}",
     )
+    if getattr(card, "image", None):
+        embed.set_thumbnail(url=card.image)
     if (bot.user) and (bot.user.avatar):
         embed.set_author(name=bot.user.display_name, icon_url=bot.user.avatar.url)
     return message.reply(embed=embed)

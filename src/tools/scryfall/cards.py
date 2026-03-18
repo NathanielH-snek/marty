@@ -23,10 +23,10 @@ class Card:
     def from_scryfall(cls, data):
         return cls(
             name=data.get("name"),
-            price=data.get("prices").get("usd"),
+            price=data.get("prices", {}).get("usd"),
             url=data.get("scryfall_uri"),
             mana_cost=data.get("mana_cost"),
-            image=data.get("image_uris").get("normal"),
+            image=data.get("image_uris", {}).get("normal"),
             type_line=data.get("type_line"),
             oracle_text=data.get("oracle_text"),
         )

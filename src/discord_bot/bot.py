@@ -102,7 +102,7 @@ class MartyBot(commands.Bot):
     async def on_message(self, message: Any) -> None:
         """Handle incoming Discord messages."""
         # Ignore messages from the bot itself
-        if message.author == self.user:
+        if message.author == self.user or "[[" in message.content:
             return
 
         # Ignore messages that start with command prefix
@@ -488,6 +488,11 @@ def create_bot() -> MartyBot:
 
         await interaction.followup.send(embed=embed)
         logger.info("Sent recent releases via /recent slash command")
+
+    async def setup():
+        await bot.add_cog(CardsCog(bot))
+
+    bot.setup_hook = setup
 
     return bot
 
