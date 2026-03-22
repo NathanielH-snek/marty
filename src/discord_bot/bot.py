@@ -102,7 +102,7 @@ class MartyBot(commands.Bot):
     async def on_message(self, message: Any) -> None:
         """Handle incoming Discord messages."""
         # Ignore messages from the bot itself
-        if message.author == self.user or "[[" in message.content:
+        if message.author == self.user:
             return
 
         # Ignore messages that start with command prefix
@@ -504,7 +504,6 @@ async def run_bot() -> None:
         raise ValueError("DISCORD_BOT_TOKEN environment variable is required")
 
     bot = create_bot()
-    await bot.add_cog(CardsCog(bot))
     await bot.start(token)
 
 
